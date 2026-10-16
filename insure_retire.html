@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="th">
+<head>
+ <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+ <meta name="theme-color" content="#b64070"><meta name="description" content="คำนวณเบี้ยและทุนประกัน Flexi Retire ทั้ง 6 แผน พร้อมเงินบำนาญและความคุ้มครองรายปี">
+ <title>Flexi Retire — TYINSURE</title>
+ <link rel="stylesheet" href="style.css">
+</head>
+<body>
+ <header class="topbar"><a class="brand" href="./" aria-label="TYINSURE หน้าแรก"><span class="brand-icon">T<span>•</span></span><span>TYINSURE<small>RETIREMENT PLANNER</small></span></a><div class="header-right"><span class="local-tag"><i></i> คำนวณในอุปกรณ์ของคุณ</span><button class="quiet" id="print" type="button">พิมพ์สรุป <span aria-hidden="true">↗</span></button></div></header>
+ <main>
+  <section class="intro"><div><p class="eyebrow">เริ่มต้นวางแผนเกษียณ</p><h1>มองเห็นอนาคต<br class="mobile-only">ผ่านตัวเลขวันนี้<span>.</span></h1><p class="intro-text">วางแผนเงินบำนาญด้วย Flexi Retire<br class="mobile-only"> เลือกแผนที่ใช่ แล้วดูผลประโยชน์ตลอดสัญญา</p></div><div class="intro-stamp"><span>6</span><div>แบบประกัน<br><strong>บำนาญถึงอายุ 90 ปี</strong></div></div></section>
+  <div class="workspace">
+   <aside class="input-panel card">
+    <div class="section-heading"><span class="step">01</span><h2>ข้อมูลสำหรับคำนวณ</h2></div>
+    <div class="mode-tabs" role="tablist" aria-label="วิธีคำนวณ"><button class="active" type="button" role="tab" id="mode-sum" aria-selected="true">จากทุนประกัน</button><button type="button" role="tab" id="mode-premium" aria-selected="false">จากเบี้ยประกัน</button></div>
+    <form id="form" novalidate>
+     <fieldset class="gender-field"><legend>เพศ</legend><div class="gender-options"><label><input type="radio" name="gender" value="male" checked><span>ชาย</span></label><label><input type="radio" name="gender" value="female"><span>หญิง</span></label></div></fieldset>
+     <div class="field"><label for="age">อายุเริ่มทำประกัน <span>ปี</span></label><input id="age" type="number" min="20" max="60" step="1" value="35" inputmode="numeric" required><small id="age-hint">อายุที่มีอัตราเบี้ยในตาราง</small></div>
+     <div class="field"><label for="plan">แผนที่สนใจ</label><select id="plan" required></select><small id="plan-hint"></small></div>
+     <div class="field amount-field"><label for="amount" id="amount-label">ทุนประกัน <span>บาท</span></label><div class="amount-wrap"><input id="amount" type="number" min="0.01" step="0.01" value="1000000" inputmode="decimal" required><span id="amount-unit">฿</span></div><small id="amount-hint"></small></div>
+     <div id="error" class="error" role="alert" hidden></div>
+    </form>
+    <a class="agent-contact" href="https://line.me/R/ti/p/@tyinsure" target="_blank" rel="noopener noreferrer" aria-label="ทัก LINE @TYINSURE เพิ่มเพื่อนผ่าน LINE (เปิดหน้าต่างใหม่)"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M27 14.5c0 6-7.5 11.5-13.4 14 .5-1.8.9-3.3.7-4.1C7.8 24 3 19.8 3 14.5 3 8.7 8.4 4 15 4s12 4.7 12 10.5Z"/><path d="M9 13h14M9 17h9"/></svg><span><strong>ทัก LINE @TYINSURE</strong><small>เพิ่มเพื่อนผ่าน LINE</small></span><span class="contact-arrow" aria-hidden="true">↗</span></a>
+   </aside>
+   <section id="results" class="results" aria-live="polite" aria-atomic="false">
+    <div class="result-top"><div class="result-heading"><span class="step">02</span><h2>ภาพรวมแผนของคุณ</h2></div><span class="plan-badge" id="plan-badge">Flexi Retire</span></div>
+    <div class="main-result card"><div class="main-result-top"><div><p id="headline-label">เบี้ยประกันรายปี</p><div class="headline"><strong id="headline-value">—</strong><span id="headline-unit">บาท/ปี</span></div></div><span class="result-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><rect x="10" y="13" width="28" height="25" rx="7"/><path d="M16 13V9m16 4V9M10 22h28m-20 8 4 4 9-9"/></svg></span></div><div class="result-divider"></div><div class="complement"><span id="complement-label">ทุนประกัน</span><strong id="complement-value">—</strong></div><div class="rate-detail" id="rate-detail"></div></div>
+    <div class="metrics"><article class="metric card"><span class="metric-dot pink"></span><p>เงินบำนาญปีแรก</p><strong id="first-pension">—</strong><small id="first-pension-note">บาท/ปี</small></article><article class="metric card"><span class="metric-dot mint"></span><p>เงินบำนาญรวม</p><strong id="total-pension">—</strong><small>บาท · เมื่อมีชีวิตอยู่ถึงอายุ 90 ปี</small></article><article class="metric card"><span class="metric-dot plum"></span><p>เบี้ยที่ชำระรวม</p><strong id="total-paid">—</strong><small id="pay-note">บาท · ตลอดระยะชำระเบี้ย</small></article></div>
+    <div class="calculation-note" id="calculation-note"></div>
+   </section>
+  </div>
+  <section class="chart-section card" id="chart-section"><div class="chart-header"><div><p class="eyebrow">เห็นภาพตลอดสัญญา</p><h2>เงินที่ชำระ กับเงินบำนาญสะสม</h2></div><div class="chart-legend"><span><i class="legend-paid"></i>เบี้ยสะสม</span><span><i class="legend-pension"></i>บำนาญสะสม</span></div></div><div id="chart" class="chart" aria-label="กราฟเปรียบเทียบเบี้ยสะสมและเงินบำนาญสะสม"></div><p class="chart-note">แตะ ชี้เมาส์ หรือลากบนกราฟเพื่อดูตัวเลขรายอายุ · ยอดสะสมไม่รวมผลประโยชน์กรณีเสียชีวิต</p></section>
+  <section class="schedule-section card" id="schedule-section"><div class="schedule-header"><div><p class="eyebrow">รายละเอียดรายปี</p><h2>ทุกช่วงอายุ วางแผนได้</h2><p id="schedule-description">เบี้ยประกัน เงินบำนาญ และความคุ้มครองถึงอายุ 90 ปี</p></div><div class="export-actions"><button id="csv" type="button" class="outline-button">ดาวน์โหลด Excel <span aria-hidden="true">↓</span></button><button id="pdf" type="button" class="outline-button">ดาวน์โหลด PDF <span aria-hidden="true">↓</span></button></div></div><div class="schedule-info"><span class="info-icon" aria-hidden="true">i</span><p>ก่อนรับบำนาญ ตารางแสดงความคุ้มครองขั้นต่ำ <strong>105% ของเบี้ยสะสม</strong> หลังเริ่มรับบำนาญ แสดงเบี้ยสะสมหักเงินบำนาญที่ได้รับแล้ว</p></div><div class="table-scroll" tabindex="0" aria-label="ตารางผลประโยชน์ เลื่อนเพื่อดูทุกคอลัมน์"><table><thead><tr><th>อายุ / ช่วงสัญญา</th><th>เบี้ยที่ชำระ<br><small>บาท/ปี</small></th><th>อัตราบำนาญ</th><th>เงินบำนาญ<br><small>บาท/ปี</small></th><th>บำนาญสะสม<br><small>บาท</small></th><th>คุ้มครองชีวิต*<br><small>บาท</small></th></tr></thead><tbody id="schedule-body"></tbody></table></div><div class="table-footer"><span id="row-count"></span><span>จำนวนเงินแสดงทศนิยม 2 ตำแหน่ง</span></div></section>
+  <section class="customer-summary card" aria-labelledby="customer-summary-title">
+   <div class="customer-summary-heading"><div><p class="eyebrow">พร้อมส่งให้ลูกค้า</p><h2 id="customer-summary-title">สรุปความคุ้มครองสำหรับ LINE</h2></div><button id="copy-summary" class="copy-summary-button" type="button" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></svg><span>คัดลอกข้อความ</span></button></div>
+   <p class="customer-summary-help" id="customer-summary-help">ข้อความปรับตามข้อมูลที่คำนวณ สามารถแก้ไขก่อนคัดลอกไปวางในแชต LINE ได้</p>
+   <label class="summary-text-label" for="customer-summary-text">ข้อความสรุปสำหรับลูกค้า</label>
+   <textarea id="customer-summary-text" rows="15" aria-describedby="customer-summary-help" spellcheck="false" placeholder="กรอกข้อมูลให้ครบเพื่อสร้างข้อความสรุป"></textarea>
+   <div class="customer-summary-bottom"><p id="summary-copy-status" role="status" aria-live="polite"></p><button id="regenerate-summary" type="button" class="text-button" disabled>สร้างข้อความใหม่จากผลคำนวณ</button></div>
+  </section>
+  <a class="agent-contact bottom-agent-contact" href="https://line.me/R/ti/p/@tyinsure" target="_blank" rel="noopener noreferrer" aria-label="ทัก LINE @TYINSURE เพิ่มเพื่อนผ่าน LINE (เปิดหน้าต่างใหม่)"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M27 14.5c0 6-7.5 11.5-13.4 14 .5-1.8.9-3.3.7-4.1C7.8 24 3 19.8 3 14.5 3 8.7 8.4 4 15 4s12 4.7 12 10.5Z"/><path d="M9 13h14M9 17h9"/></svg><span><strong>ทัก LINE @TYINSURE</strong><small>เพิ่มเพื่อนผ่าน LINE</small></span><span class="contact-arrow" aria-hidden="true">↗</span></a>
+ </main>
+ <footer><span class="footer-brand">TYINSURE<span> วางแผนวันนี้ เพื่อวันข้างหน้า</span></span><span>Flexi Retire Calculator · ข้อมูลจากเอกสารที่ให้ไว้</span></footer>
+ <div id="loading" class="loading">กำลังโหลดตารางอัตราเบี้ย…</div>
+ <script type="module" src="app.mjs"></script>
+</body>
+</html>
